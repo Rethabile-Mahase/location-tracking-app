@@ -40,3 +40,4 @@ jobs:
 
           build-args: |
             NEXT_PUBLIC_GOOGLE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_API_KEY }}
+            NEXT_PUBLIC_USERBACK_KEY=${{ secrets.NEXT_PUBLIC_USERBACK_KEY }}

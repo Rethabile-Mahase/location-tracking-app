@@ -9,9 +9,11 @@ COPY package.json package-lock.json ./
 
 # Build argument for Google Maps API key
 ARG NEXT_PUBLIC_GOOGLE_API_KEY
+ARG NEXT_PUBLIC_USERBACK_KEY
 
 # Make it available during build
 ENV NEXT_PUBLIC_GOOGLE_API_KEY=$NEXT_PUBLIC_GOOGLE_API_KEY
+ENV NEXT_PUBLIC_USERBACK_KEY=$NEXT_PUBLIC_USERBACK_KEY
 
 # Install dependencies
 RUN npm install --legacy-peer-deps
