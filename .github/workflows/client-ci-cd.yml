@@ -8,6 +8,9 @@ on:
 env: 
     REGISTRY: ghcr.io
     USER_NAME: 'rethabile-mahase'
+permissions:
+  contents: read
+  packages: write
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
