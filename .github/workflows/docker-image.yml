@@ -5,7 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+env: 
+    REGISTRY: ghcr.io
+    USER_NAME: 'rethabile-mahase'
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -19,7 +21,7 @@ jobs:
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -29,4 +31,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner | lower }}/location-tracking-app:latest
+          tags: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/location-tracking-app:latest
