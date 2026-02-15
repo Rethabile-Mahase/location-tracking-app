@@ -1,23 +1,23 @@
-# Use official Node.js image as the base
 FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy config files first for better layer caching
 COPY package.json package-lock.json ./
+COPY postcss.config.mjs tailwind.config.ts ./
 
-# Install dependencies (bypass peer dependency conflicts)
-RUN npm install --legacy-peer-deps --omit=dev
+# Install dependencies (including devDependencies for build)
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
 
+# Set environment variable for production
+ENV NODE_ENV=production
+
 # Build the Next.js app
 RUN npm run build
 
-# Expose port (default for Next.js)
 EXPOSE 3000
 
-# Start the Next.js app
 CMD ["npm", "start"]
