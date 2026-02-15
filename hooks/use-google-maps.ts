@@ -9,7 +9,7 @@ let loaderInstance: Loader | null = null
 function getLoader() {
   if (!loaderInstance) {
     loaderInstance = new Loader({
-      apiKey: "AIzaSyCQIvMOvQ-WCdGS-nV2FyiBOHYf9AlSO_4",
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
       version: "weekly",
       libraries: ["places", "geometry"],
     })
