@@ -29,9 +29,3 @@ EXPOSE 3000
 
 # Start the Next.js app
 CMD ["npm", "start"]
-
-# Expose port (default for Next.js)
-EXPOSE 3000
-
-# Start the Next.js app
-CMD ["npm", "start"]
