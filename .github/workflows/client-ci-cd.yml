@@ -37,3 +37,6 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/location-tracking-app:latest
           no-cache: true
+
+          build-args: |
+            NEXT_PUBLIC_GOOGLE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_API_KEY }}

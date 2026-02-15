@@ -7,6 +7,12 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
 
+# Build argument for Google Maps API key
+ARG NEXT_PUBLIC_GOOGLE_API_KEY
+
+# Make it available during build
+ENV NEXT_PUBLIC_GOOGLE_API_KEY=$NEXT_PUBLIC_GOOGLE_API_KEY
+
 # Install dependencies
 RUN npm install --legacy-peer-deps
 
