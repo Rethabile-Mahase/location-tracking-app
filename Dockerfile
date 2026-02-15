@@ -1,26 +1,25 @@
+# Use official Node.js image as the base
+FROM node:20-alpine
 
-# Builder stage: build with all dependencies
-FROM node:20-alpine AS builder
+# Set working directory
 WORKDIR /app
+
+# Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
+
+# Install dependencies
 RUN npm install --legacy-peer-deps
+
+# Copy the rest of the application code
 COPY . .
+
+# Build the Next.js app
 RUN npm run build
 
-# Production stage: only production dependencies and built output
-FROM node:20-alpine AS production
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install --production --legacy-peer-deps
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/next.config.mjs ./next.config.mjs
-COPY --from=builder /app/tailwind.config.ts ./tailwind.config.ts
-COPY --from=builder /app/postcss.config.mjs ./postcss.config.mjs
-COPY --from=builder /app/app ./app
+# Expose port (default for Next.js)
 EXPOSE 3000
+
+# Start the Next.js app
 CMD ["npm", "start"]
 
 # Expose port (default for Next.js)
